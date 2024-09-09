@@ -1,0 +1,40 @@
+{% from "bootstrap5/form.html" import render_form %}
+{% include "header.html" %}
+
+<header
+    <header style="background-image: url('/static/assets/cafe_example2.jpg')">
+    <section class="py-5 text-center container">
+      <div class="row py-lg-5">
+        <div class="col-lg-6 col-md-8 mx-auto">
+          <h1 class="text-white">Add here your new place!</h1>
+          <p class="lead text-white">Please fill in the form in order to add a new place</p>
+          <p>
+<!--            <a href="#" class="btn btn-primary my-2">Main call to action</a>-->
+            <a href="#" class="btn btn-secondary my-2">Add a place</a>
+          </p>
+        </div>
+      </div>
+    </section>
+</header>
+
+
+<main class="mb-4">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-md-10 mx-auto">
+         {% with messages = get_flashed_messages() %}
+         {% if messages %}
+         {% for message in messages %}
+            <p class="flash">{{ message }}</p>
+         {% endfor %}
+         {% endif %}
+         {% endwith %}
+          <p></p>
+        {{ render_form(form, novalidate=True) }}
+      </div>
+    </div>
+  </div>
+</main>
+
+
+{% include "footer.html" %}

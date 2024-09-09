@@ -1,0 +1,33 @@
+{% from "bootstrap5/form.html" import render_form %}
+{% include "header.html" %}
+
+<header style="background-image: url('/static/assets/cafe_example2.jpg')">
+    <section class="py-5 text-center container">
+      <div class="row py-lg-5">
+        <div class="col-lg-6 col-md-8 mx-auto">
+          <h1 class="text-white">Register</h1>
+          <p class="lead text-white">PLease register in order to be able leave a comment or add a place</p>
+        </div>
+      </div>
+    </section>
+</header>
+
+<main class="mb-4">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-md-10 mx-auto">
+         {% with messages = get_flashed_messages() %}
+         {% if messages %}
+         {% for message in messages %}
+            <p class="flash">{{ message }}</p>
+         {% endfor %}
+         {% endif %}
+         {% endwith %}
+          <p></p>
+        {{ render_form(form, novalidate=True) }}
+      </div>
+    </div>
+  </div>
+</main>
+
+{% include "footer.html" %}
