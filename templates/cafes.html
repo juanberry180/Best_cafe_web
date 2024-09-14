@@ -1,0 +1,73 @@
+{% include "header.html" %}
+
+
+<header class="bg-image" style="background-image: url('/static/assets/cafe_example2.jpg')">
+    <section class="py-5 text-center container">
+        <div class="row py-lg-5">
+            <div class="col-lg-6 col-md-8 mx-auto">
+                <h1 class="text-white">Find your place to go!</h1>
+            </div>
+        </div>
+    </section>
+</header>
+
+
+<table class="table table-striped mx-auto" style="width: 80%;">
+    <h2 class="text-center my-4">Cafes list</h2>
+    <thead>
+    <tr>
+        <th scope="col">Number</th>
+        <th scope="col">Cafe name</th>
+        <th scope="col">City</th>
+        <th scope="col">Seats</th>
+        <th scope="col">Price</th>
+        <th scope="col">Has Toilet</th>
+        <th scope="col">Has Wifi</th>
+        <th scope="col">Has Sockets</th>
+        <th scope="col">Can take calls</th>
+        <th scope="col">Go to cafe</th>
+        {% if current_user.is_authenticated and current_user_id == 1 %}
+            <th scope="col">Delete</th>
+        {% endif %}
+
+
+    </tr>
+    </thead>
+    <tbody>
+    {% for cafe in all_cafes:%}
+    <tr>
+        <td>{{ cafe.id }}</td>
+        <td>{{ cafe.cafe_name }}</td>
+        <td>{{ cafe.city }}</td>
+        <td>{{ cafe.seats}}</td>
+        <td>{{ cafe.coffee_price }}</td>
+        {% if cafe.has_toilet ==1: %}
+        <td>Yes</td>
+        {% else: %}
+        <td>No</td>
+        {% endif %}
+        {% if cafe.has_wifi ==1: %}
+        <td>Yes</td>
+        {% else: %}
+        <td>No</td>
+        {% endif %}
+         {% if cafe.has_sockets ==1: %}
+        <td>Yes</td>
+        {% else: %}
+        <td>No</td>
+        {% endif %}
+        {% if cafe.can_take_calls ==1: %}
+        <td>Yes</td>
+        {% else: %}
+        <td>No</td>
+        {% endif %}
+        <td><a href="{{ url_for('cafe_post', cafe_id=cafe.id)}}">Link</a></td>
+        {% if current_user.is_authenticated and current_user_id == 1 %}
+        <td><a href="{{ url_for('delete_cafe', cafe_id=cafe.id)}}">Delete</a></td>
+        {% endif %}
+     </tr>
+    {% endfor %}
+    </tbody>
+</table>
+
+{% include "footer.html" %}

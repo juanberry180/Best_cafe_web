@@ -1,42 +1,47 @@
 {% include "header.html" %}
 
-<header style="background-image: url('/static/assets/cafe_example2.jpg')">
+<header class="bg-image" style="background-image: url('/static/assets/cafe_example2.jpg')">
     <section class="py-5 text-center container">
-      <div class="row py-lg-5">
-        <div class="col-lg-6 col-md-8 mx-auto">
-          <h1 class="text-white">This is your place!</h1>
-          <p class="lead text-white">Here you can find the collection of cafes and restaurants in which you can feel like at home.</p>
+        <div class="row py-lg-5">
+            <div class="col-lg-6 col-md-8 mx-auto">
+                <h1 class="text-white">This is your place!</h1>
+                <p class="lead text-white">Here you can find the collection of cafes and restaurants in which you can
+                    feel like
+                    at home.</p>
+            </div>
         </div>
-      </div>
     </section>
 </header>
 
 <main>
     <div class="album py-5 bg-body-tertiary">
-      <div class="container">
-        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-          {% for cafe in all_cafes %}
-          <div class="col">
-            <div class="card shadow-sm">
-               <a href="{{url_for('cafe_post', cafe_id=cafe.id)}}" title=""><img class="bd-placeholder-img card-img-top" width="100%" height="225" src={{ cafe.img_url }} ></a>
-              <div class="card-body">
-                <p class="card-text">{{ cafe.description }}</p>
-                <div class="d-flex justify-content-between align-items-center">
-                  <div class="btn-group">
-                    <a type="button" class="btn btn-sm btn-outline-secondary" href="{{url_for('cafe_post', cafe_id=cafe.id)}}">View</a>
-<!--                    <a type="button" class="btn btn-sm btn-outline-secondary" href="{{url_for('cafe_post', cafe_id=cafe.id)}}">Edit</a>-->
-                  </div>
-                  <small class="text-body-secondary">{{ cafe.input_date }}</small>
+        <div class="container">
+            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+                {% for cafe in all_cafes %}
+                <div class="col">
+                    <div class="card shadow-sm">
+                        <a href="{{url_for('cafe_post', cafe_id=cafe.id)}}" title=""><img
+                                class="bd-placeholder-img card-img-top" width="100%" height="225" src={{ cafe.img_url
+                                }}></a>
+                        <div class="card-body">
+                            <p class="card-text">{{ cafe.description }}</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="btn-group">
+                                    <a type="button" class="btn btn-sm btn-outline-secondary"
+                                       href="{{url_for('cafe_post', cafe_id=cafe.id)}}">View</a>
+                                    <!--                    <a type="button" class="btn btn-sm btn-outline-secondary" href="{{url_for('cafe_post', cafe_id=cafe.id)}}">Edit</a>-->
+                                </div>
+                                <small class="text-body-secondary">{{ cafe.input_date }}</small>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-              </div>
+                {% endfor %}
             </div>
-          </div>
-          {% endfor %}
-          </div>
         </div>
-      </div>
     </div>
-  </main>
+    </div>
+</main>
 
 {% include "footer.html" %}
 

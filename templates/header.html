@@ -11,13 +11,19 @@
         <div class="container d-flex flex-wrap">
           <ul class="nav me-auto">
             <li class="nav-item"><a href="{{ url_for('home')}}" class="nav-link link-body-emphasis px-2 active" aria-current="page">Home</a></li>
-            <li class="nav-item"><a href="#" class="nav-link link-body-emphasis px-2">Cafes</a></li>
-            <li class="nav-item"><a href="#" class="nav-link link-body-emphasis px-2">Contact</a></li>
+            <li class="nav-item"><a href="{{ url_for('cafes')}}" class="nav-link link-body-emphasis px-2">Cafes</a></li>
+            <li class="nav-item"><a href="{{ url_for('contact') }}" class="nav-link link-body-emphasis px-2">Contact</a></li>
+            {% if current_user.is_authenticated: %}
             <li class="nav-item"><a href="{{ url_for('add_new_place')}}" class="nav-link link-body-emphasis px-2">Add Place</a></li>
+            {% endif %}
           </ul>
           <ul class="nav">
+            {% if current_user.is_authenticated: %}
+              <li class="nav-item"><a href="{{ url_for('logout')}}" class="nav-link link-body-emphasis px-2">Logout</a></li>
+            {% else: %}
             <li class="nav-item"><a href="{{ url_for('login')}}" class="nav-link link-body-emphasis px-2">Login</a></li>
             <li class="nav-item"><a href="{{ url_for('register')}}" class="nav-link link-body-emphasis px-2">Register</a></li>
+            {% endif %}
           </ul>
         </div>
       </nav>

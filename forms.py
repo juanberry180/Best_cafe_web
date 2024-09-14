@@ -5,8 +5,9 @@ from flask_ckeditor import CKEditorField
 
 
 class CafeForm(FlaskForm):
-    name = StringField("Cafe name", validators=[DataRequired()])
+    cafe_name = StringField("Cafe name", validators=[DataRequired()])
     img_url = FileField("File", validators=[InputRequired()])
+    city = StringField("City", validators=[DataRequired()])
     address = StringField("Address", validators=[DataRequired()])
     seats = StringField("Enter aprox. number of seats", validators=[DataRequired()])
     coffee_price = StringField("Caffee price", validators=[DataRequired()])
@@ -20,7 +21,7 @@ class CafeForm(FlaskForm):
 class RegisterForm(FlaskForm):
     email = StringField("Email", validators=[DataRequired(), Email()])
     password = PasswordField("Password", validators=[DataRequired()])
-    name = StringField("Name", validators=[DataRequired()])
+    user_name = StringField("Name", validators=[DataRequired()])
     submit = SubmitField("Sign Me Up!")
 
 
@@ -28,6 +29,18 @@ class LoginForm(FlaskForm):
     email = StringField("Email", validators=[DataRequired(), Email()])
     password = PasswordField("Password", validators=[DataRequired()])
     submit = SubmitField("Log Me In!")
+
+
+class CommentForm(FlaskForm):
+    text = CKEditorField("Comment", validators=[DataRequired()])
+    submit = SubmitField("Submit Comment")
+
+
+class ContactForm(FlaskForm):
+    contact_email = StringField("Email", validators=[DataRequired(), Email()])
+    contact_name = StringField("Name", validators=[DataRequired()])
+    contact_text = CKEditorField("Contact", validators=[DataRequired()])
+    submit = SubmitField("Submit Comment")
 
 
 

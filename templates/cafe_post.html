@@ -1,3 +1,4 @@
+{% from "bootstrap5/form.html" import render_form %}
 {% include "header.html" %}
 
 <header style="background-image: url('/static/assets/cafe_example2.jpg')">
@@ -17,11 +18,9 @@
         <div class="col-10 col-sm-8 col-lg-6">
             <a href="#" title=""><img src={{ cafe.img_url }} class="d-block mx-lg-auto img-fluid" alt="Cafe Picture"
                                       width="700" height="500" loading="lazy"></a>
-            <iframe src={{ cafe.map_url }}></iframe>
-
         </div>
         <div class="col-lg-6">
-            <h1 class="display-5 fw-bold text-body-emphasis lh-1 mb-3">{{ cafe.name }}</h1>
+            <h1 class="display-5 fw-bold text-body-emphasis lh-1 mb-3">{{ cafe.cafe_name }}</h1>
             <p class="lead">{{ cafe.description }}</p>
             <p></p>
             <div class="d-grid gap-2 d-md-flex justify-content-md-start">
@@ -32,9 +31,9 @@
     </div>
 </div>
 
-<div class="container px-4 py-5" id="hanging-icons">
+<div class="container px-4 py-3" id="hanging-icons">
     <h2 class="pb-2 border-bottom">Info about the place</h2>
-    <div class="row g-4 py-5 row-cols-1 row-cols-lg-2">
+    <div class="row g-4 py-5 row-cols-1 row-cols-lg-3">
 
         <div class="col d-flex align-items-start">
             <div class="icon-square text-body-emphasis bg-body-secondary d-inline-flex align-items-center justify-content-center fs-4 flex-shrink-0 me-3">
@@ -138,9 +137,36 @@
         </div>
     </div>
 
-
 </div>
 </div>
 
+<div class="container px-4 py-3">
+    <h2 class="pb-2 border-bottom">Comments</h2>
+    <ul class="commentList">
+        {% for comment in comments %}
+        <li>
+            <div class="commenterImage">
+                <img src="{{ comment.user_name.user_name | gravatar }}"/>
+            </div>
+            <div class="commentText">
+                <p>{{ comment.text|safe }}</p>
+                <span class="date sub-text">{{ comment.user_name.user_name}}</span>
+            </div>
+        </li>
+        {% endfor %}
+    </ul>
+    {% if current_user.is_authenticated: %}
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    {% for message in messages %}
+    <p class="sucess">{{ message }}</p>
+    {% endfor %}
+    {% endif %}
+    {% endwith %}
+    <p></p>
+    {{ render_form(form, novalidate=True) }}
+    {% endif %}
+</div>
 
 {% include "footer.html" %}
+
